@@ -20,6 +20,8 @@ client.query("select * from contacts", (err, res) => {
 });
 
 app.use(cors());
+app.use(express.json());
+
 app.get("/contacts", (req, res) => {
   res.json({ contacts: ["contact 1", "contact 2"] });
 });
