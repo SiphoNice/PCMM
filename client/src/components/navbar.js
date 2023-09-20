@@ -24,26 +24,16 @@ export default function Nav() {
             <ul className="navbar-nav">
               <li className="nav-item">
                 <Link className="nav-link active" aria-current="page" to="/">
-                  Home
+                  Dashboard
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/">
-                  Incidents
+                <Link className="nav-link" to="maps">
+                  Maps
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/">
-                  Mines
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/">
-                  Production Figures
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/">
+                <Link className="nav-link" to="contacts">
                   Contacts
                 </Link>
               </li>
