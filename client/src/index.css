@@ -1,0 +1,12 @@
+html,body{
+    margin: 0;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+}
+.navbar li a{
+    color: #002e6a;
+    letter-spacing: 0.1rem;
+}
