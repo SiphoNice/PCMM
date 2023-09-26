@@ -1,0 +1,93 @@
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+export default function SeverityTable() {
+  const [locations, setLocations] = useState([]);
+
+  const getAllIncidentsPoints = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:3001/select_all_safety_incident"
+      );
+      const data = await response.json();
+      setLocations(data);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    getAllIncidentsPoints();
+  }, []);
+
+  return (
+    <>
+      <div className="card has-table">
+        <header className="card-header">
+          <p className="card-header-title">
+            <span className="icon">
+              <i className="mdi mdi-account-multiple"></i>
+            </span>
+            Incidents
+          </p>
+          <Link to="/" className="card-header-icon">
+            <span className="icon">
+              <i className="mdi mdi-reload"></i>
+            </span>
+          </Link>
+        </header>
+        <div className="card-content">
+          <table>
+            <thead>
+              <tr>
+                <th>Mine</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Severity</th>
+                <th>Description</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {locations.map((location) => (
+                <tr>
+                  <td data-label="Name">{location.mine_id}</td>
+                  <td data-label="Company">{location.latitude}</td>
+                  <td data-label="City">{location.longitude}</td>
+                  <td data-label="Severity">
+                    {location.severity === "High" ? (
+                      <p style={{ color: "red" }}>{location.severity}</p>
+                    ) : location.severity === "Low" ? (
+                      <p style={{ color: "grey" }}>{location.severity}</p>
+                    ) : (
+                      <p style={{ color: "green" }}>{location.severity}</p>
+                    )}
+                  </td>
+
+                  <td data-label="Created">
+                    <small className="text-gray-500" title="Oct 25, 2021">
+                      {location.description}
+                    </small>
+                  </td>
+                  <td className="actions-cell">
+                    <div className="buttons right nowrap">
+                      <button
+                        className="button small red --jb-modal"
+                        data-target="sample-modal"
+                        type="button"
+                      >
+                        <span className="icon">
+                          <i className="mdi mdi-trash-can"></i>
+                        </span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </>
+  );
+}
