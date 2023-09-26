@@ -1,6 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "../node_modules/bootstrap/dist/css/bootstrap.css";
-import Nav from "./components/navbar";
 import Dashboard from "./pages/dashboard";
 import Maps from "./pages/maps";
 import Contacts from "./pages/contact";
@@ -10,7 +8,6 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Nav />
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/maps" element={<Maps />} />

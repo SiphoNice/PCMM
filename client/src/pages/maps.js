@@ -15,7 +15,7 @@ export default function Maps() {
         zoom={13}
         scrollwheelzoom={false}
         style={{
-          height: "100%",
+          height: "650px",
           backgroundcolor: "red",
           margintop: "80px",
           marginbottom: "90px",
