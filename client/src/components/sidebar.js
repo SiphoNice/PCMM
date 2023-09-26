@@ -10,7 +10,7 @@ export default function Sidebar() {
         </div>
       </div>
       <div className="menu is-menu-main">
-        <p className="menu-label">General</p>
+        <p className="menu-label">DASHBOARD SECTION</p>
         <ul className="menu-list">
           <li className="active">
             <Link to="/">
@@ -21,10 +21,10 @@ export default function Sidebar() {
             </Link>
           </li>
         </ul>
-        <p className="menu-label">Examples</p>
+        <p className="menu-label">MORE FUNCTIONALITIES</p>
         <ul className="menu-list">
           <li className="--set-active-tables-html">
-            <Link to="/maps">
+            <Link to="/create-incidents">
               <span className="icon">
                 <i className="mdi mdi-square-edit-outline"></i>
               </span>
@@ -32,7 +32,7 @@ export default function Sidebar() {
             </Link>
           </li>
           <li className="--set-active-forms-html">
-            <Link to="/contact">
+            <Link to="/contacts">
               <span className="icon">
                 <i className="mdi mdi-table"></i>
               </span>

@@ -3,7 +3,8 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 import markerImage from "../assets/images/marker.png";
 import Sidebar from "../components/sidebar";
-import logo from "../assets/images/logo/logo.png";
+import { Link } from 'react-router-dom';
+
 export default function Dashboard() {
   const ICON = new Icon({
     iconUrl: markerImage,
@@ -12,77 +13,120 @@ export default function Dashboard() {
   return (
     <>
       <Sidebar />
-      <section class="is-hero-bar">
-        <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
-          <h1 class="title">Dashboard</h1>
+      <section className="is-hero-bar">
+        <div className="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+          <h1 className="title">Dashboard</h1>
         </div>
       </section>
-      <section class="section main-section">
-        <div class="grid gap-6 grid-cols-1 md:grid-cols-3 mb-6">
-          <div class="card">
-            <div class="card-content">
-              <div class="flex items-center justify-between">
-                <div class="widget-label">
+      <section className="section main-section">
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-3 mb-6">
+          <div className="card">
+            <div className="card-content">
+              <div className="flex items-center justify-between">
+                <div className="widget-label">
                   <h3>Clients</h3>
                   <h1>512</h1>
                 </div>
-                <span class="icon widget-icon text-green-500">
-                  <i class="mdi mdi-account-multiple mdi-48px"></i>
+                <span className="icon widget-icon text-green-500">
+                  <i className="mdi mdi-account-multiple mdi-48px"></i>
                 </span>
               </div>
             </div>
           </div>
-          <div class="card">
-            <div class="card-content">
-              <div class="flex items-center justify-between">
-                <div class="widget-label">
+          <div className="card">
+            <div className="card-content">
+              <div className="flex items-center justify-between">
+                <div className="widget-label">
                   <h3>Sales</h3>
                   <h1>$7,770</h1>
                 </div>
-                <span class="icon widget-icon text-blue-500">
-                  <i class="mdi mdi-cart-outline mdi-48px"></i>
+                <span className="icon widget-icon text-blue-500">
+                  <i className="mdi mdi-cart-outline mdi-48px"></i>
                 </span>
               </div>
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-content">
-              <div class="flex items-center justify-between">
-                <div class="widget-label">
+          <div className="card">
+            <div className="card-content">
+              <div className="flex items-center justify-between">
+                <div className="widget-label">
                   <h3>Performance</h3>
                   <h1>256%</h1>
                 </div>
-                <span class="icon widget-icon text-red-500">
-                  <i class="mdi mdi-finance mdi-48px"></i>
+                <span className="icon widget-icon text-red-500">
+                  <i className="mdi mdi-finance mdi-48px"></i>
                 </span>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="card mb-6">
-          <header class="card-header">
-            <p class="card-header-title">
-              <span class="icon">
-                <i class="mdi mdi-finance"></i>
+        <div className="card mb-6">
+          <header className="card-header">
+            <p className="card-header-title">
+              <span className="icon">
+                <i className="mdi mdi-finance"></i>
+              </span>
+              Maps
+            </p>
+            <Link to="/" className="card-header-icon">
+              <span className="icon">
+                <i className="mdi mdi-reload"></i>
+              </span>
+            </Link>
+          </header>
+          <div className="card-content">
+            <div className="chart-area">
+              <div className="h-full">
+                <div className="chartjs-size-monitor">
+                  <div className="chartjs-size-monitor-expand">
+                    <MapContainer
+                      center={[51.762718, -0.22471]}
+                      zoom={13}
+                      scrollwheelzoom={false}
+                      style={{
+                        height: "650px",
+                        backgroundcolor: "red",
+                        margintop: "80px",
+                        marginbottom: "90px",
+                      }}
+                    >
+                      <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      />
+                      <Marker icon={ICON} position={[51.762718, -0.22471]}>
+                        <Popup>Man information</Popup>
+                      </Marker>
+                    </MapContainer>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="card mb-6">
+          <header className="card-header">
+            <p className="card-header-title">
+              <span className="icon">
+                <i className="mdi mdi-finance"></i>
               </span>
               Performance
             </p>
-            <a href="#" class="card-header-icon">
-              <span class="icon">
-                <i class="mdi mdi-reload"></i>
+            <Link to="/" className="card-header-icon">
+              <span className="icon">
+                <i className="mdi mdi-reload"></i>
               </span>
-            </a>
+            </Link>
           </header>
-          <div class="card-content">
-            <div class="chart-area">
-              <div class="h-full">
-                <div class="chartjs-size-monitor">
-                  <div class="chartjs-size-monitor-expand">
+          <div className="card-content">
+            <div className="chart-area">
+              <div className="h-full">
+                <div className="chartjs-size-monitor">
+                  <div className="chartjs-size-monitor-expand">
                     <div></div>
                   </div>
-                  <div class="chartjs-size-monitor-shrink">
+                  <div className="chartjs-size-monitor-shrink">
                     <div></div>
                   </div>
                 </div>
@@ -90,21 +134,21 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        <div class="card has-table">
-          <header class="card-header">
-            <p class="card-header-title">
-              <span class="icon">
-                <i class="mdi mdi-account-multiple"></i>
+        <div className="card has-table">
+          <header className="card-header">
+            <p className="card-header-title">
+              <span className="icon">
+                <i className="mdi mdi-account-multiple"></i>
               </span>
               Clients
             </p>
-            <a href="#" class="card-header-icon">
-              <span class="icon">
-                <i class="mdi mdi-reload"></i>
+            <Link to="/" className="card-header-icon">
+              <span className="icon">
+                <i className="mdi mdi-reload"></i>
               </span>
-            </a>
+            </Link>
           </header>
-          <div class="card-content">
+          <div className="card-content">
             <table>
               <thead>
                 <tr>
@@ -119,45 +163,45 @@ export default function Dashboard() {
               </thead>
               <tbody>
                 <tr>
-                  <td class="image-cell">
-                    <div class="image">
+                  <td className="image-cell">
+                    <div className="image">
                       <img
                         src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg"
-                        class="rounded-full"
+                        className="rounded-full" alt=""
                       />
                     </div>
                   </td>
                   <td data-label="Name">Rebecca Bauch</td>
                   <td data-label="Company">Daugherty-Daniel</td>
                   <td data-label="City">South Cory</td>
-                  <td data-label="Progress" class="progress-cell">
+                  <td data-label="Progress" className="progress-cell">
                     <progress max="100" value="79">
                       79
                     </progress>
                   </td>
                   <td data-label="Created">
-                    <small class="text-gray-500" title="Oct 25, 2021">
+                    <small className="text-gray-500" title="Oct 25, 2021">
                       Oct 25, 2021
                     </small>
                   </td>
-                  <td class="actions-cell">
-                    <div class="buttons right nowrap">
+                  <td className="actions-cell">
+                    <div className="buttons right nowrap">
                       <button
-                        class="button small green --jb-modal"
+                        className="button small green --jb-modal"
                         data-target="sample-modal-2"
                         type="button"
                       >
-                        <span class="icon">
-                          <i class="mdi mdi-eye"></i>
+                        <span className="icon">
+                          <i className="mdi mdi-eye"></i>
                         </span>
                       </button>
                       <button
-                        class="button small red --jb-modal"
+                        className="button small red --jb-modal"
                         data-target="sample-modal"
                         type="button"
                       >
-                        <span class="icon">
-                          <i class="mdi mdi-trash-can"></i>
+                        <span className="icon">
+                          <i className="mdi mdi-trash-can"></i>
                         </span>
                       </button>
                     </div>
