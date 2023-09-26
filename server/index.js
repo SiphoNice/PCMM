@@ -3,7 +3,7 @@ const cors = require("cors");
 const { Client } = require("pg");
 const app = express();
 
-// Database connection 
+// Database connection
 const client = new Client({
   host: "localhost",
   user: "postgres",
@@ -79,17 +79,23 @@ app.delete("/delete_safety_incident/:id", async (req, res) => {
 });
 
 // Get all contact details
-app.get("/select_all_contacts", async(req,res)=>{
-  try{
-    const contacts =  await client.query("SELECT * FROM contacts");
-    res.json(contacts.rows[0]);
-  }
-  catch(err)
-  {
+app.get("/select_all_contacts", async (req, res) => {
+  try {
+    const contacts = await client.query("SELECT * FROM contacts");
+    res.json(contacts.rows);
+  } catch (err) {
     console.log(err.message);
   }
-})
-
+});
+// Get all contact details
+app.get("/select_all_mines", async (req, res) => {
+  try {
+    const mines = await client.query("SELECT * FROM mines");
+    res.json(mines.rows);
+  } catch (err) {
+    console.log(err.message);
+  }
+});
 app.listen(3001, () => {
   console.log("Server is running on Port 3001");
 });
