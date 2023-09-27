@@ -28,7 +28,6 @@ export default function EditForm() {
   return (
     <>
       <form method="get" onSubmit={onSumbitLocation}>
-        
         <div className="field">
           <label className="label">Latitude</label>
           <div className="field-body">

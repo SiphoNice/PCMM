@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import EditForm from "./edit_form";
 export default function SeverityTable() {
   const [locations, setLocations] = useState([]);

@@ -1568,6 +1568,7 @@ progress::-ms-fill {
 }
 
 .modal {
+    
     display: none;
     flex-direction: column;
     align-items: center;
@@ -1578,7 +1579,7 @@ progress::-ms-fill {
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 40
+    z-index: 450
 }
 
 .modal.active {
