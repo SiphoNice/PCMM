@@ -126,6 +126,16 @@ app.get("/select_all_mines", async (req, res) => {
     console.log(err.message);
   }
 });
+
+app.get("/select_all_mines/:id", async (req, res) => {
+  try {
+    const {id} = req.params;
+    const safety_incident = await client.query("SELECT * FROM mines INNER JOIN contacts ON mines.contact_person_id = contacts.id WHERE mines.id=$1",[id]);
+     res.json(safety_incident.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 app.listen(3001, () => {
   console.log("Server is running on Port 3001");
 });

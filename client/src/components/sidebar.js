@@ -31,6 +31,14 @@ export default function Sidebar() {
               <span className="menu-item-label">Create Incidents</span>
             </Link>
           </li>
+          <li className="--set-active-tables-html">
+            <Link to="/mines">
+              <span className="icon">
+                <i className="mdi mdi mdi-hospital-building"></i>
+              </span>
+              <span className="menu-item-label">Mines</span>
+            </Link>
+          </li>
           <li className="--set-active-forms-html">
             <Link to="/contacts">
               <span className="icon">

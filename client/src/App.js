@@ -3,7 +3,7 @@ import Dashboard from "./pages/dashboard";
 import Maps from "./pages/maps";
 import Contacts from "./pages/contact";
 import Error404 from "./pages/error404";
-
+import Mines from "./pages/mines";
 function App() {
   return (
     <>
@@ -11,6 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/create-incidents" element={<Maps />} />
+          <Route path="/mines" element={<Mines />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
