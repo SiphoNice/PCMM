@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import EditForm from "./edit_form";
 export default function SeverityTable() {
   const [locations, setLocations] = useState([]);
+
   const getAllIncidentsPoints = async () => {
     try {
       const response = await fetch(
@@ -11,6 +12,8 @@ export default function SeverityTable() {
       );
       const data = await response.json();
       setLocations(data);
+
+      console.log(data);
     } catch (err) {
       console.log(err.message);
     }
@@ -82,24 +85,7 @@ export default function SeverityTable() {
                   </td>
                   <td className="actions-cell">
                     <div className="buttons right nowrap">
-                      <button
-                        className="button small blue --jb-modal"
-                        data-target="sample-modal"
-                        type="button"
-                        onClick={() => {
-                          if (
-                            window.confirm(
-                              "Are you sure you want to edit this?"
-                            )
-                          ) {
-                            deletIncedent(location.id);
-                          }
-                        }}
-                      >
-                        <span className="icon">
-                          <i className="mdi mdi mdi-table-edit"></i>
-                        </span>
-                      </button>
+                      <EditForm location={location}/>
                       <button
                         className="button small red --jb-modal"
                         data-target="sample-modal"

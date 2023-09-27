@@ -53,6 +53,8 @@ app.get("/select_where_safety_incident/:id", async (req, res) => {
 app.put("/update_safety_incident/:id", async (req, res) => {
   try {
     const { id } = req.params;
+
+    console.log(id);
     const { latitude, longitude, description, severity } = req.body;
     const update_safety_incident = await client.query(
       "UPDATE incidents SET latitude=$1, longitude=$2, description=$3, severity=$4 WHERE id=$5",
@@ -87,7 +89,6 @@ app.get("/select_all_contacts", async (req, res) => {
     console.log(err.message);
   }
 });
-
 app.delete("/delete_contact_details/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -100,10 +101,6 @@ app.delete("/delete_contact_details/:id", async (req, res) => {
     console.error(err.message);
   }
 });
-
-
-
-
 // Get all contact details
 app.get("/select_all_mines", async (req, res) => {
   try {

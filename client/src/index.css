@@ -1567,44 +1567,10 @@ progress::-ms-fill {
     width: 100%
 }
 
-.modal {
-    
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 450
-}
 
-.modal.active {
-    display: flex
-}
 
-.modal-background {
-    --tw-bg-opacity: 1;
-    background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
-    --tw-bg-opacity: 0.8;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0
-}
 
-.modal-card {
-    max-height: calc(100vh - 160px);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    position: relative;
-    width: 100%
-}
+
 
 @media (min-width:1024px) {
     .modal-card {

@@ -6,6 +6,7 @@ import SeverityTable from "../components/severityTable";
 export default function Dashboard() {
   return (
     <>
+
       <Sidebar />
       <section className="is-hero-bar">
         <div className="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
