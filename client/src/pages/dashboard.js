@@ -74,7 +74,7 @@ export default function Dashboard() {
               <div className="h-full">
                 <div className="chartjs-size-monitor">
                   <div className="chartjs-size-monitor-expand">
-                    <div></div>
+                    <div id="big-line-chart"></div>
                   </div>
                   <div className="chartjs-size-monitor-shrink">
                     <div></div>

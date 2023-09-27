@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import EditForm from "./edit_form";
 export default function SeverityTable() {
   const [locations, setLocations] = useState([]);
   const getAllIncidentsPoints = async () => {
@@ -81,6 +81,24 @@ export default function SeverityTable() {
                   </td>
                   <td className="actions-cell">
                     <div className="buttons right nowrap">
+                      <button
+                        className="button small blue --jb-modal"
+                        data-target="sample-modal"
+                        type="button"
+                        onClick={() => {
+                          if (
+                            window.confirm(
+                              "Are you sure you want to edit this?"
+                            )
+                          ) {
+                            deletIncedent(location.id);
+                          }
+                        }}
+                      >
+                        <span className="icon">
+                          <i className="mdi mdi mdi-table-edit"></i>
+                        </span>
+                      </button>
                       <button
                         className="button small red --jb-modal"
                         data-target="sample-modal"
