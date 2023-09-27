@@ -53,8 +53,6 @@ app.get("/select_where_safety_incident/:id", async (req, res) => {
 app.put("/update_safety_incident/:id", async (req, res) => {
   try {
     const { id } = req.params;
-
-    console.log(id);
     const { latitude, longitude, description, severity } = req.body;
     const update_safety_incident = await client.query(
       "UPDATE incidents SET latitude=$1, longitude=$2, description=$3, severity=$4 WHERE id=$5",
