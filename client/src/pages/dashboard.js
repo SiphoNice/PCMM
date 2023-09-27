@@ -18,11 +18,11 @@ export default function Dashboard() {
             <div className="card-content">
               <div className="flex items-center justify-between">
                 <div className="widget-label">
-                  <h3>Clients</h3>
-                  <h1>512</h1>
+                  <h3>Number of Mines</h3>
+                  <h1>14</h1>
                 </div>
                 <span className="icon widget-icon text-green-500">
-                  <i className="mdi mdi-account-multiple mdi-48px"></i>
+                  <i className="mdi mdi mdi-hospital-building mdi-48px"></i>
                 </span>
               </div>
             </div>
@@ -31,11 +31,11 @@ export default function Dashboard() {
             <div className="card-content">
               <div className="flex items-center justify-between">
                 <div className="widget-label">
-                  <h3>Sales</h3>
-                  <h1>$7,770</h1>
+                  <h3>Incidents</h3>
+                  <h1>3000</h1>
                 </div>
                 <span className="icon widget-icon text-blue-500">
-                  <i className="mdi mdi-cart-outline mdi-48px"></i>
+                  <i className="mdi mdi mdi-image-filter-hdr mdi-48px"></i>
                 </span>
               </div>
             </div>
@@ -44,11 +44,11 @@ export default function Dashboard() {
             <div className="card-content">
               <div className="flex items-center justify-between">
                 <div className="widget-label">
-                  <h3>Performance</h3>
-                  <h1>256%</h1>
+                  <h3>High severity</h3>
+                  <h1>12</h1>
                 </div>
                 <span className="icon widget-icon text-red-500">
-                  <i className="mdi mdi-finance mdi-48px"></i>
+                  <i className="mdi mdi mdi-priority-high mdi-48px"></i>
                 </span>
               </div>
             </div>

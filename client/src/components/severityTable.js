@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 export default function SeverityTable() {
   const [locations, setLocations] = useState([]);
-
   const getAllIncidentsPoints = async () => {
     try {
       const response = await fetch(
@@ -19,6 +18,17 @@ export default function SeverityTable() {
   useEffect(() => {
     getAllIncidentsPoints();
   }, []);
+
+  const deletIncedent = async (id) => {
+    try {
+      await fetch(`http://localhost:3001/delete_safety_incident/${id}`, {
+        method: "DELETE",
+      });
+      setLocations(locations.filter((location) => location.id !== id));
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
 
   return (
     <>
@@ -50,7 +60,7 @@ export default function SeverityTable() {
             </thead>
             <tbody>
               {locations.map((location) => (
-                <tr>
+                <tr key={location.id}>
                   <td data-label="Name">{location.mine_id}</td>
                   <td data-label="Company">{location.latitude}</td>
                   <td data-label="City">{location.longitude}</td>
@@ -75,6 +85,15 @@ export default function SeverityTable() {
                         className="button small red --jb-modal"
                         data-target="sample-modal"
                         type="button"
+                        onClick={() => {
+                          if (
+                            window.confirm(
+                              "Are you sure you want to delete this?"
+                            )
+                          ) {
+                            deletIncedent(location.id);
+                          }
+                        }}
                       >
                         <span className="icon">
                           <i className="mdi mdi-trash-can"></i>
