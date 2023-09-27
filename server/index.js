@@ -87,6 +87,23 @@ app.get("/select_all_contacts", async (req, res) => {
     console.log(err.message);
   }
 });
+
+app.delete("/delete_contact_details/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const delete_contact_details = await client.query(
+      "DELETE FROM contacts WHERE id=$1",
+      [id]
+    );
+    res.json("Contact details");
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+
+
+
 // Get all contact details
 app.get("/select_all_mines", async (req, res) => {
   try {

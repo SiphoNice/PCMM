@@ -15,6 +15,17 @@ export default function Contacts() {
   useEffect(() => {
     getAllContacts();
   }, []);
+  const deletContact = async (id) => {
+    try {
+      await fetch(`http://localhost:3001/delete_contact_details/${id}`, {
+        method: "DELETE",
+      });
+      setContactsData(contactsData.filter((contact) => contact.id !== id));
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   return (
     <>
       <Sidebar />
@@ -32,11 +43,6 @@ export default function Contacts() {
               </span>
               Contact Information
             </p>
-            <Link to="/" className="card-header-icon">
-              <span className="icon">
-                <i className="mdi mdi-reload"></i>
-              </span>
-            </Link>
           </header>
           <div className="card-content">
             <table>
@@ -47,7 +53,6 @@ export default function Contacts() {
                   <th>Surname</th>
                   <th>Email</th>
                   <th>Contact No</th>
-
                   <th></th>
                 </tr>
               </thead>
@@ -67,11 +72,19 @@ export default function Contacts() {
                     <td data-label="contact">{contact.contact_number}</td>
                     <td className="actions-cell">
                       <div className="buttons right nowrap">
-                        
                         <button
                           className="button small red --jb-modal"
                           data-target="sample-modal"
                           type="button"
+                          onClick={() => {
+                            if (
+                              window.confirm(
+                                "Are you sure you want to delete this contact?"
+                              )
+                            ) {
+                              deletContact(contact.id);
+                            }
+                          }}
                         >
                           <span className="icon">
                             <i className="mdi mdi-trash-can"></i>
