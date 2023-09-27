@@ -14,7 +14,7 @@ Before you can run the application you need to:
 
 Clone this repository:
 
-git clone ....
+git clone https://github.com/SiphoNice/PCMM.git
 
 Once cloned.
 
