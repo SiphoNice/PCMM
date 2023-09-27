@@ -36,6 +36,15 @@ app.get("/select_all_safety_incident", async (req, res) => {
     console.error(err.message);
   }
 });
+app.get("/select_count_safety_incident/:severity", async (req, res) => {
+  try {
+    const { severity}  = req.params;
+    const safety_incident = await client.query("SELECT COUNT(severity) FROM incidents WHERE severity=$1",[severity]);
+    res.json(safety_incident.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 // fetch a specific incidents
 app.get("/select_where_safety_incident/:id", async (req, res) => {
   try {
