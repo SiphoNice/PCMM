@@ -28,18 +28,27 @@ app.post("/create_safety_incident", async (req, res) => {
     console.error(err.message);
   }
 });
+
+// SELECT product_id, product_name, category_name
+// FROM products
+// INNER JOIN categories ON products.category_id = categories.category_id;
+
+
 app.get("/select_all_safety_incident", async (req, res) => {
   try {
-    const safety_incident = await client.query("SELECT * FROM incidents");
-    res.json(safety_incident.rows);
+    const safety_incident = await client.query("SELECT * FROM incidents INNER JOIN mines ON incidents.mine_id = mines.id");
+     res.json(safety_incident.rows);
   } catch (err) {
     console.error(err.message);
   }
 });
 app.get("/select_count_safety_incident/:severity", async (req, res) => {
   try {
-    const { severity}  = req.params;
-    const safety_incident = await client.query("SELECT COUNT(severity) FROM incidents WHERE severity=$1",[severity]);
+    const { severity } = req.params;
+    const safety_incident = await client.query(
+      "SELECT COUNT(severity) FROM incidents WHERE severity=$1",
+      [severity]
+    );
     res.json(safety_incident.rows[0]);
   } catch (err) {
     console.error(err.message);

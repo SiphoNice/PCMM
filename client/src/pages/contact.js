@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../components/sidebar";
-import { Link } from "react-router-dom";
+
 export default function Contacts() {
   const [contactsData, setContactsData] = useState([]);
   const getAllContacts = async () => {

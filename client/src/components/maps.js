@@ -63,13 +63,15 @@ export default function Maps() {
                       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    {locations.map((location) => (
+                    {locations.map((location, index) => (
                       <Marker
-                        key={location.id}
+                        key={index}
                         icon={ICON}
                         position={[location.latitude, location.longitude]}
                       >
                         <Popup>
+                          <h4 style={{ fontWeight: "bold" }}>Mine Name</h4>
+                          {/* <p style={{ margin: "0px" }}>{location.name}</p> */}
                           <h4 style={{ fontWeight: "bold" }}>Description</h4>
                           <p style={{ margin: "0px" }}>
                             {location.description}

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 export default function EditForm({ location }) {
-  const [mine_id, setMineId] = useState(location.mine_id);
+  
   const [latitude, setLatitude] = useState(location.latitude);
   const [longitude, setLongitude] = useState(location.longitude);
   const [description, setDescription] = useState(location.description);
@@ -19,6 +19,7 @@ export default function EditForm({ location }) {
           body: JSON.stringify(body),
         }
       );
+      console.log(response);
       window.location = "/";
     } catch (err) {
       console.error(err.message);
@@ -58,7 +59,7 @@ export default function EditForm({ location }) {
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body">
+              <div className="modal-body">
                 <div className="field">
                   <label className="label">Latitude</label>
                   <div className="field-body">

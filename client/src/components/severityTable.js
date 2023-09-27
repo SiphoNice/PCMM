@@ -12,8 +12,6 @@ export default function SeverityTable() {
       );
       const data = await response.json();
       setLocations(data);
-
-      console.log(data);
     } catch (err) {
       console.log(err.message);
     }
@@ -63,9 +61,9 @@ export default function SeverityTable() {
               </tr>
             </thead>
             <tbody>
-              {locations.map((location) => (
-                <tr key={location.id}>
-                  <td data-label="Name">{location.mine_id}</td>
+              {locations.map((location, index) => (
+                <tr key={index}>
+                  <td data-label="Name">{location.name}</td>
                   <td data-label="Company">{location.latitude}</td>
                   <td data-label="City">{location.longitude}</td>
                   <td data-label="Severity">
