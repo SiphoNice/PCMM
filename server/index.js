@@ -26,6 +26,19 @@ app.post("/create_safety_incident", async (req, res) => {
     console.error(err.message);
   }
 });
+
+app.get("/select_all_safety_incident_data", async (req, res) => {
+  try {
+    const safety_incident = await client.query(
+      "SELECT * FROM incidents"
+    );
+    res.json(safety_incident.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+//Select all join
 app.get("/select_all_safety_incident", async (req, res) => {
   try {
     const safety_incident = await client.query(

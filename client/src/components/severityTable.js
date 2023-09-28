@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-
 import EditForm from "./edit_form";
 export default function SeverityTable() {
   const [locations, setLocations] = useState([]);
@@ -42,11 +40,6 @@ export default function SeverityTable() {
             </span>
             Incidents
           </p>
-          <Link to="/" className="card-header-icon">
-            <span className="icon">
-              <i className="mdi mdi-reload"></i>
-            </span>
-          </Link>
         </header>
         <div className="card-content">
           <table>

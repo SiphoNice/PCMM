@@ -25,9 +25,7 @@ export default function Dashboard() {
               Performance
             </p>
             <Link to="/" className="card-header-icon">
-              <span className="icon">
-                <i className="mdi mdi-reload"></i>
-              </span>
+             
             </Link>
           </header>
           <div className="card-content">

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 import markerImage from "../assets/images/marker.png";
-import { Link } from "react-router-dom";
+
 export default function Maps() {
   const [locations, setLocations] = useState([]);
   const ICON = new Icon({
@@ -13,10 +13,11 @@ export default function Maps() {
   const getAllIncidentsPoints = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3001/select_all_safety_incident"
+        "http://localhost:3001/select_all_safety_incident_data"
       );
       const data = await response.json();
       setLocations(data);
+      console.log(data)
     } catch (err) {
       console.log(err.message);
     }
@@ -36,11 +37,6 @@ export default function Maps() {
             </span>
             Maps
           </p>
-          <Link to="/" className="card-header-icon">
-            <span className="icon">
-              <i className="mdi mdi-reload"></i>
-            </span>
-          </Link>
         </header>
         <div className="card-content">
           <div className="chart-area">
@@ -71,7 +67,6 @@ export default function Maps() {
                       >
                         <Popup>
                           <h4 style={{ fontWeight: "bold" }}>Mine Name</h4>
-                          {/* <p style={{ margin: "0px" }}>{location.name}</p> */}
                           <h4 style={{ fontWeight: "bold" }}>Description</h4>
                           <p style={{ margin: "0px" }}>
                             {location.description}
