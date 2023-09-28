@@ -29,9 +29,7 @@ app.post("/create_safety_incident", async (req, res) => {
 
 app.get("/select_all_safety_incident_data", async (req, res) => {
   try {
-    const safety_incident = await client.query(
-      "SELECT * FROM incidents"
-    );
+    const safety_incident = await client.query("SELECT * FROM incidents");
     res.json(safety_incident.rows);
   } catch (err) {
     console.error(err.message);
@@ -144,6 +142,34 @@ app.get("/select_all_mines/:id", async (req, res) => {
     console.error(err.message);
   }
 });
+//Select all production figures and mines
+app.get("/select_all_production_figures/:year", async (req, res) => {
+  try {
+    const { year } = req.params;
+    const production_figures = await client.query(
+      "SELECT * FROM production_figures CROSS JOIN mines WHERE year=$1",
+      [year]
+    );
+    res.json(production_figures.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+// Select all from production figures
+app.get("/select_all_production_figures", async (req, res) => {
+  try {
+    const { year } = req.params;
+    const production_figures = await client.query(
+      "SELECT * FROM production_figures"
+    );
+    res.json(production_figures.rows);
+    
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+
 app.listen(3001, () => {
   console.log("Server is running on Port 3001");
 });

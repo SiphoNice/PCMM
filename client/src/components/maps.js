@@ -9,7 +9,6 @@ export default function Maps() {
     iconUrl: markerImage,
     iconSize: [32, 45],
   });
-
   const getAllIncidentsPoints = async () => {
     try {
       const response = await fetch(
@@ -17,12 +16,10 @@ export default function Maps() {
       );
       const data = await response.json();
       setLocations(data);
-      console.log(data)
     } catch (err) {
       console.log(err.message);
     }
   };
-
   useEffect(() => {
     getAllIncidentsPoints();
   }, []);
@@ -66,7 +63,6 @@ export default function Maps() {
                         position={[location.latitude, location.longitude]}
                       >
                         <Popup>
-                          <h4 style={{ fontWeight: "bold" }}>Mine Name</h4>
                           <h4 style={{ fontWeight: "bold" }}>Description</h4>
                           <p style={{ margin: "0px" }}>
                             {location.description}
@@ -74,12 +70,12 @@ export default function Maps() {
                           <h4 style={{ fontWeight: "bold" }}>Severity</h4>
                           {location.severity === "High" ||
                           location.severity === "high" ? (
-                            <p style={{ color: "red" }}>{location.severity}</p>
+                            <p style={{ color: "red", margin: "0px" }}>{location.severity}</p>
                           ) : location.severity === "Low" ||
                             location.severity === "low" ? (
-                            <p style={{ color: "grey" }}>{location.severity}</p>
+                            <p style={{ color: "grey", margin: "0px" }}>{location.severity}</p>
                           ) : (
-                            <p style={{ color: "green" }}>
+                            <p style={{ color: "green", margin: "0px" }}>
                               {location.severity}
                             </p>
                           )}

@@ -1,9 +1,9 @@
 import React from "react";
 import Sidebar from "../components/sidebar";
-import { Link } from "react-router-dom";
 import Maps from "../components/maps";
 import SeverityTable from "../components/severityTable";
 import Stats from "../components/stats";
+import LineChat from "../components/lineChart";
 export default function Dashboard() {
   return (
     <>
@@ -16,33 +16,7 @@ export default function Dashboard() {
       <section className="section main-section">
         <Stats />
         <Maps />
-        <div className="card mb-6">
-          <header className="card-header">
-            <p className="card-header-title">
-              <span className="icon">
-                <i className="mdi mdi-finance"></i>
-              </span>
-              Performance
-            </p>
-            <Link to="/" className="card-header-icon">
-             
-            </Link>
-          </header>
-          <div className="card-content">
-            <div className="chart-area">
-              <div className="h-full">
-                <div className="chartjs-size-monitor">
-                  <div className="chartjs-size-monitor-expand">
-                    <div id="big-line-chart"></div>
-                  </div>
-                  <div className="chartjs-size-monitor-shrink">
-                    <div></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <LineChat />
         <SeverityTable />
       </section>
     </>
