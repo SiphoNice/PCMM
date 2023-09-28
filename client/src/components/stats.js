@@ -21,7 +21,7 @@ const [medium, setMedium] = useState("");
             "http://localhost:3001/select_count_safety_incident/Low"
           );
           const data = await response.json();
-          setMedium(data.count);        
+          setLow(data.count);        
         } catch (err) {
           console.log(err.message);
         }
@@ -32,7 +32,7 @@ const [medium, setMedium] = useState("");
             "http://localhost:3001/select_count_safety_incident/Medium"
           );
           const data = await response.json();
-          setLow(data.count);
+          setMedium(data.count);
         } catch (err) {
           console.log(err.message);
         }

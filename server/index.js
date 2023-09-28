@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const { Client } = require("pg");
 const app = express();
-
 // Database connection
 const client = new Client({
   host: "localhost",
@@ -14,7 +13,6 @@ const client = new Client({
 client.connect();
 app.use(cors());
 app.use(express.json());
-
 // Create a new  incidents
 app.post("/create_safety_incident", async (req, res) => {
   try {
@@ -28,16 +26,12 @@ app.post("/create_safety_incident", async (req, res) => {
     console.error(err.message);
   }
 });
-
-// SELECT product_id, product_name, category_name
-// FROM products
-// INNER JOIN categories ON products.category_id = categories.category_id;
-
-
 app.get("/select_all_safety_incident", async (req, res) => {
   try {
-    const safety_incident = await client.query("SELECT * FROM incidents INNER JOIN mines ON incidents.mine_id = mines.id");
-     res.json(safety_incident.rows);
+    const safety_incident = await client.query(
+      "SELECT * FROM incidents INNER JOIN mines ON incidents.mine_id = mines.id"
+    );
+    res.json(safety_incident.rows);
   } catch (err) {
     console.error(err.message);
   }
@@ -46,7 +40,7 @@ app.get("/select_count_safety_incident/:severity", async (req, res) => {
   try {
     const { severity } = req.params;
     const safety_incident = await client.query(
-      "SELECT COUNT(severity) FROM incidents WHERE severity=$1",
+      "SELECT COUNT(severity) FROM incidents WHERE severity ILIKE $1",
       [severity]
     );
     res.json(safety_incident.rows[0]);
@@ -95,7 +89,6 @@ app.delete("/delete_safety_incident/:id", async (req, res) => {
     console.error(err.message);
   }
 });
-
 // Get all contact details
 app.get("/select_all_contacts", async (req, res) => {
   try {
@@ -126,12 +119,14 @@ app.get("/select_all_mines", async (req, res) => {
     console.log(err.message);
   }
 });
-
 app.get("/select_all_mines/:id", async (req, res) => {
   try {
-    const {id} = req.params;
-    const safety_incident = await client.query("SELECT * FROM mines INNER JOIN contacts ON mines.contact_person_id = contacts.id WHERE mines.id=$1",[id]);
-     res.json(safety_incident.rows);
+    const { id } = req.params;
+    const safety_incident = await client.query(
+      "SELECT * FROM mines INNER JOIN contacts ON mines.contact_person_id = contacts.id WHERE mines.id=$1",
+      [id]
+    );
+    res.json(safety_incident.rows);
   } catch (err) {
     console.error(err.message);
   }
