@@ -147,7 +147,7 @@ app.get("/select_all_production_figures/:year", async (req, res) => {
   try {
     const { year } = req.params;
     const production_figures = await client.query(
-      "SELECT * FROM production_figures CROSS JOIN mines WHERE year=$1",
+      "SELECT * FROM production_figures WHERE year=$1",
       [year]
     );
     res.json(production_figures.rows);
