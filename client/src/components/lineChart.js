@@ -26,7 +26,6 @@ export default function LineChat() {
           `http://localhost:3001/select_all_production_figures/${year}`
         );
         const data = await response.json();
-        console.log(data);
         setProductionFigures(data);
         setShowLineBar(true);
         setDropdownError("");

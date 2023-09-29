@@ -956,7 +956,7 @@ body {
     top: 0;
     left: -15rem;
     width: 15rem;
-    z-index: 40;
+    z-index: 600;
     transition-property: all;
     transition-timing-function: cubic-bezier(.4, 0, .2, 1);
     transition-duration: 150ms
@@ -992,13 +992,13 @@ body {
 }
 
 .aside-mobile-expanded #app {
-    margin-left: 15rem
+    margin-left: 0rem
 }
 
-.aside-mobile-expanded,
+/* .aside-mobile-expanded,
 .aside-mobile-expanded body {
     overflow: hidden
-}
+} */
 
 @media (min-width:1024px) {
 
@@ -1805,5 +1805,10 @@ footer {
 @media (min-width:1024px) {
     .lg\:grid-cols-2 {
         grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+}
+@media (max-width: 780px) {
+    .block-hide-mobile{
+        display: none;
     }
 }
