@@ -17,16 +17,17 @@ app.use(express.json());
 app.post("/create_safety_incident", async (req, res) => {
   try {
     const { mine_id, latitude, longitude, description, severity } = req.body;
-    const add_incident = await client.query(
-      "INSERT INTO incidents(mine_id,latitude,longitude,description,severity) VALUES($1,$2,$3,$4,$5) RETURNING * ",
-      [mine_id, latitude, longitude, description, severity]
-    );
-    res.json(add_incident.rows[0]);
+    if (mine_id && latitude && longitude && description && severity) {
+      const add_incident = await client.query(
+        "INSERT INTO incidents(mine_id,latitude,longitude,description,severity) VALUES($1,$2,$3,$4,$5) RETURNING * ",
+        [mine_id, latitude, longitude, description, severity]
+      );
+      res.json(add_incident.rows[0]);
+    }
   } catch (err) {
     console.error(err.message);
   }
 });
-
 app.get("/select_all_safety_incident_data", async (req, res) => {
   try {
     const safety_incident = await client.query("SELECT * FROM incidents");
@@ -35,7 +36,6 @@ app.get("/select_all_safety_incident_data", async (req, res) => {
     console.error(err.message);
   }
 });
-
 //Select all join
 app.get("/select_all_safety_incident", async (req, res) => {
   try {
@@ -81,7 +81,6 @@ app.put("/update_safety_incident/:id", async (req, res) => {
       "UPDATE incidents SET latitude=$1, longitude=$2, description=$3, severity=$4 WHERE id=$5",
       [latitude, longitude, description, severity, id]
     );
-
     res.json("Incident updated");
   } catch (err) {
     console.error(err.message);
@@ -167,7 +166,6 @@ app.get("/select_all_production_figures", async (req, res) => {
     console.error(err.message);
   }
 });
-
 app.listen(3001, () => {
   console.log("Server is running on Port 3001");
 });
