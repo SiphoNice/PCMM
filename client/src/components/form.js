@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { locationSchema } from "../validation/locationValidation";
+
 export default function Form() {
   const [mine_id, setMineId] = useState("");
   const [latitude, setLatitude] = useState("");
@@ -6,42 +8,68 @@ export default function Form() {
   const [description, setDescription] = useState("");
   const [severity, setSeverity] = useState("");
   const [minesData, setMinesData] = useState([]);
-
+  const [formError, setFormError] = useState("");
+  const [formSuccess, setFormSuccess] = useState("");
+  
   const onSumbitLocation = async (e) => {
     e.preventDefault();
-    try {
-      const body = {mine_id, latitude, longitude, description, severity};
-      const response = await fetch(
-        "http://localhost:3001/create_safety_incident",
+    let formData = {
+      mine_id: e.target[0].value,
+      latitude: e.target[1].value,
+      longitude: e.target[2].value,
+      description: e.target[3].value,
+      severity: e.target[4].value,
+    };
+    const isValid = await locationSchema.isValid(formData);
+    if (isValid === true) {
+      try {
+        const body = { mine_id, latitude, longitude, description, severity };
+        const response = await fetch(
+          "http://localhost:3001/create_safety_incident",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          }
+        );
+       
+        if(response.status == "200")
         {
-          method: 'POST',
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body)
+          setFormSuccess("Location added succesfully");
         }
-      );
-      console.log(response);
+        else{
+          setFormSuccess("Encounted an error");
+        }
+      } catch (err) {
+        console.error(err.message);
+      }
+    }
+    else{
+      setFormError("Please populate all form fields");
+    }
+  };
+  const listOfMines = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/select_all_mines");
+      const data = await response.json();
+      setMinesData(data);
     } catch (err) {
       console.error(err.message);
     }
   };
-const listOfMines =  async () => {
-   try{
-     const response =  await fetch("http://localhost:3001/select_all_mines")
-     const data =  await response.json();
-     setMinesData(data);
-   }
-   catch(err)
-   {
-     console.error(err.message);
-   }
-}
-useEffect(()=>{
-   listOfMines()
-},[])
+  useEffect(() => {
+    listOfMines();
+  }, []);
   return (
     <>
       <form method="get" onSubmit={onSumbitLocation}>
         <div className="field">
+          {formError && (
+            <div className="alert alert-danger">{formError}</div>
+          )}
+          {formSuccess && (
+            <div className="alert alert-success">{formSuccess}</div>
+          )}
           <label className="label">Mines</label>
           <div className="control">
             <div className="select">
@@ -51,8 +79,10 @@ useEffect(()=>{
                 onChange={(e) => setMineId(e.target.value)}
               >
                 <option value="">Select mine</option>
-                {minesData.map(mine =>(
-                  <option key={mine.id} value={mine.id}>{mine.name}</option>
+                {minesData.map((mine) => (
+                  <option key={mine.id} value={mine.id}>
+                    {mine.name}
+                  </option>
                 ))}
               </select>
             </div>
