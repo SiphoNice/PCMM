@@ -36,13 +36,14 @@ app.get("/select_all_safety_incident_data", async (req, res) => {
     console.error(err.message);
   }
 });
-//Select all join
+//Select all 
 app.get("/select_all_safety_incident", async (req, res) => {
   try {
     const safety_incident = await client.query(
-      "SELECT * FROM incidents INNER JOIN mines ON incidents.mine_id = mines.id"
+      "SELECT * FROM incidents"
     );
     res.json(safety_incident.rows);
+    console.log(safety_incident.rows)
   } catch (err) {
     console.error(err.message);
   }
@@ -91,9 +92,10 @@ app.delete("/delete_safety_incident/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const delete_safety_incident = await client.query(
-      "DELETE FROM incidents WHERE id=$1",
+      "DELETE FROM incidents WHERE incidents.id=$1",
       [id]
     );
+
     res.json("Incident deleted");
   } catch (err) {
     console.error(err.message);

@@ -45,7 +45,7 @@ export default function SeverityTable() {
           <table>
             <thead>
               <tr>
-                <th>Mine</th>
+               
                 <th>Latitude</th>
                 <th>Longitude</th>
                 <th>Severity</th>
@@ -56,7 +56,6 @@ export default function SeverityTable() {
             <tbody>
               {locations.map((location, index) => (
                 <tr key={index}>
-                  <td data-label="Name">{location.name}</td>
                   <td data-label="Company">{location.latitude}</td>
                   <td data-label="City">{location.longitude}</td>
                   <td data-label="Severity">
