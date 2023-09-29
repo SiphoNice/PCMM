@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
+import { Chart as ChartJS } from "chart.js/auto";
 
 export default function LineChat() {
   const [year, setYear] = useState("");
   const [yearData, setYearsData] = useState([]);
-  const [productionFigures, ProductionFigures] = useState([]);
-  
+  const [productionFigures, setProductionFigures] = useState([]);
+  const [showLineBar, setShowLineBar] = useState(false);
 
   const listOfYears = async () => {
     try {
-      const response = await fetch("http://localhost:3001/select_all_production_figures");
+      const response = await fetch(
+        "http://localhost:3001/select_all_production_figures"
+      );
       const data = await response.json();
       setYearsData(data);
     } catch (err) {
@@ -17,23 +20,29 @@ export default function LineChat() {
     }
   };
 
-
-
-
-
-
   const getProductionFigures = async (year) => {
     try {
       const response = await fetch(
         `http://localhost:3001/select_all_production_figures/${year}`
       );
       const data = await response.json();
-      console.log(data);
-      ProductionFigures(data);
+      setProductionFigures(data);
+      setShowLineBar(true);
     } catch (err) {
       console.error(err.message);
     }
   };
+
+  const information = {
+    labels: productionFigures.map((data) => data.year),
+    datasets: [
+      {
+        label: "production figures",
+        data: productionFigures.map((data) => data.yield),
+      },
+    ],
+  };
+
   useEffect(() => {
     listOfYears();
   }, []);
@@ -46,7 +55,7 @@ export default function LineChat() {
             <span className="icon">
               <i className="mdi mdi-finance"></i>
             </span>
-            Performance {year}
+            Production figures {year}
           </p>
         </header>
         <div className="card-content">
@@ -67,7 +76,7 @@ export default function LineChat() {
                                 onChange={(e) => setYear(e.target.value)}
                               >
                                 <option value="">Select mine</option>
-                                {yearData.map((year,index) => (
+                                {yearData.map((year, index) => (
                                   <option key={index} value={year.year}>
                                     {year.year}
                                   </option>
@@ -91,8 +100,10 @@ export default function LineChat() {
                     </div>
                   </div>
                 </div>
-                <div className="card-content table">
-                  <p>Hello</p>
+                <div className="card-content table-responsive">
+                  {showLineBar && (
+                    <Line data={information} style={{ width: "100%" }} />
+                  )}
                 </div>
               </div>
             </div>
