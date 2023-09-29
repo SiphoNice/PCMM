@@ -33,7 +33,7 @@ export default function Form() {
           }
         );
        
-        if(response.status === "200")
+        if(response.status == "200")
         {
           setFormSuccess("Location added succesfully");
         }

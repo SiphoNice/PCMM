@@ -163,12 +163,10 @@ app.get("/select_all_production_figures", async (req, res) => {
       "SELECT * FROM production_figures"
     );
     res.json(production_figures.rows);
-    
   } catch (err) {
     console.error(err.message);
   }
 });
-
 
 app.listen(3001, () => {
   console.log("Server is running on Port 3001");
