@@ -6,11 +6,12 @@ export default function Sidebar() {
     <aside className="aside is-placed-left is-expanded">
       <div className="aside-tools">
         <div>
-        <img src={logo} alt="CSRI Logo"  />
+          <Link to="/">
+            <img src={logo} alt="CSRI Logo" />
+          </Link>
         </div>
       </div>
       <div className="menu is-menu-main">
-        <p className="menu-label">DASHBOARD SECTION</p>
         <ul className="menu-list">
           <li className="active">
             <Link to="/">
@@ -21,7 +22,6 @@ export default function Sidebar() {
             </Link>
           </li>
         </ul>
-        <p className="menu-label">MORE FUNCTIONALITIES</p>
         <ul className="menu-list">
           <li className="--set-active-tables-html">
             <Link to="/create-incidents">

@@ -7,7 +7,7 @@ export default function LineChat() {
   const [yearData, setYearsData] = useState([]);
   const [productionFigures, setProductionFigures] = useState([]);
   const [showLineBar, setShowLineBar] = useState(false);
-
+  const [dropdownError, setDropdownError] = useState("");
   const listOfYears = async () => {
     try {
       const response = await fetch(
@@ -19,18 +19,22 @@ export default function LineChat() {
       console.error(err.message);
     }
   };
-
   const getProductionFigures = async (year) => {
-    try {
-      const response = await fetch(
-        `http://localhost:3001/select_all_production_figures/${year}`
-      );
-      const data = await response.json();
-      console.log(data);
-      setProductionFigures(data);
-      setShowLineBar(true);
-    } catch (err) {
-      console.error(err.message);
+    if (year !== "") {
+      try {
+        const response = await fetch(
+          `http://localhost:3001/select_all_production_figures/${year}`
+        );
+        const data = await response.json();
+        console.log(data);
+        setProductionFigures(data);
+        setShowLineBar(true);
+        setDropdownError("");
+      } catch (err) {
+        console.error(err.message);
+      }
+    } else {
+      setDropdownError("Please select the year");
     }
   };
 
@@ -68,6 +72,11 @@ export default function LineChat() {
                     <div className="table-responsive">
                       <form method="get">
                         <div className="field">
+                          {dropdownError && (
+                            <div className="alert alert-danger">
+                              {dropdownError}
+                            </div>
+                          )}
                           <label className="label">Select the year</label>
                           <div className="control">
                             <div className="select">
@@ -93,7 +102,7 @@ export default function LineChat() {
                               className="button green"
                               onClick={() => getProductionFigures(year)}
                             >
-                              Load data
+                              Production figures
                             </button>
                           </div>
                         </div>

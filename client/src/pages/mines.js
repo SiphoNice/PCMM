@@ -5,6 +5,7 @@ export default function Mines() {
   const [mine_id, setMineId] = useState("");
   const [minesData, setMinesData] = useState([]);
   const [mineDetails, setMinedetails] = useState([]);
+  const [dropdownError, setDropdownError] = useState("");
   const listOfMines = async () => {
     try {
       const response = await fetch("http://localhost:3001/select_all_mines");
@@ -15,15 +16,19 @@ export default function Mines() {
     }
   };
   const getMineData = async (mine_id) => {
-    try {
-      const response = await fetch(
-        `http://localhost:3001/select_all_mines/${mine_id}`
-      );
-      const data = await response.json();
-      console.log(data);
-      setMinedetails(data);
-    } catch (err) {
-      console.error(err.message);
+    if (mine_id !== "") {
+      try {
+        const response = await fetch(
+          `http://localhost:3001/select_all_mines/${mine_id}`
+        );
+        const data = await response.json();
+        setMinedetails(data);
+        setDropdownError("");
+      } catch (err) {
+        console.error(err.message);
+      }
+    } else {
+      setDropdownError("Please select Mine name");
     }
   };
   useEffect(() => {
@@ -51,6 +56,10 @@ export default function Mines() {
           <div className="card-content">
             <form method="get">
               <div className="field">
+                {dropdownError && (
+                  <div className="alert alert-danger">{dropdownError}</div>
+                )}
+
                 <label className="label">Mines</label>
                 <div className="control">
                   <div className="select">
@@ -73,10 +82,10 @@ export default function Mines() {
                 <div className="control">
                   <button
                     type="button"
-                    className="button green"
+                    className="button green w-100"
                     onClick={() => getMineData(mine_id)}
                   >
-                    Get Mine
+                    Get Mine Information
                   </button>
                 </div>
               </div>
