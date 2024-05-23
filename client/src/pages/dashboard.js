@@ -11,7 +11,7 @@ export default function Dashboard() {
         <Sidebar />
         <section className="is-hero-bar">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
-            <h1 className="title">Dashboard</h1>
+            <h1 className="title">Dashboard..</h1>
           </div>
         </section>
         <section className="section main-section">
